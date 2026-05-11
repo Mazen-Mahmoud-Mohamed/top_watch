@@ -1,0 +1,21 @@
+{
+  "name": "topwatch-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TOP Watch store — Node API + static frontend",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/seed.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mongoose": "^8.8.1"
+  }
+}

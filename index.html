@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TOP Watch - متجر الساعات الفاخرة. أفضل الساعات الكلاسيكية والكاجوال للرجال والنساء">
+    <meta name="keywords" content="ساعات, ساعات فاخرة, ساعات رجالية, ساعات نسائية, TOP Watch">
+    <meta name="author" content="TOP Watch">
+
+    <meta property="og:title" content="TOP Watch - متجر الساعات الفاخرة">
+    <meta property="og:description" content="اكتشف مجموعتنا الفاخرة من الساعات الكلاسيكية والكاجوال">
+    <meta property="og:type" content="website">
+
+    <title>TOP Watch - متجر الساعات الفاخرة</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader">
+            <div class="loader-logo loader-logo-img">
+                <img src="images/logo1.png" alt="" width="120" height="120" decoding="async" class="loader-brand-logo">
+            </div>
+            <div class="loader-text">TOP Watch</div>
+        </div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo" onclick="app.navigate('home')" title="الرئيسية">
+                    <img id="navLogoImg" class="nav-brand-logo" src="images/logo1.png" alt="" width="96" height="96" decoding="async" loading="eager">
+                    <span class="logo-icon-fallback" style="display:none;width:96px;height:96px;border-radius:50%;border:2px solid var(--gold);align-items:center;justify-content:center;color:var(--gold);"><i class="fas fa-crown"></i></span>
+                    <span class="logo-text" id="navStoreName">TOP Watch</span>
+                </div>
+
+                <ul class="nav-menu desktop-menu">
+                    <li><a href="#" onclick="app.navigate('home'); return false;" class="active">الرئيسية</a></li>
+                    <li><a href="#" onclick="app.filterByCategory('men-classic'); return false;">رجالي كلاسيك</a></li>
+                    <li><a href="#" onclick="app.filterByCategory('men-casual'); return false;">رجالي كاجوال</a></li>
+                    <li><a href="#" onclick="app.filterByCategory('women'); return false;">حريمي</a></li>
+                    <li><a href="#" onclick="app.navigate('contact'); return false;">تواصل معنا</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div class="sound-toggle" onclick="toggleSound()" title="تشغيل/إيقاف النغمات" id="soundToggleBtn">
+                        <i class="fas fa-volume-up" id="soundIcon"></i>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="search" id="searchInput" autocomplete="off" placeholder="ابحث عن ساعة..." onkeyup="app.searchProducts(this.value)">
+                        <i class="fas fa-search"></i>
+                    </div>
+
+                    <div class="cart-icon" onclick="app.toggleCart()" title="السلة">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+
+                    <div class="mobile-menu-btn" onclick="app.toggleMobileMenu()" aria-label="القائمة">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav-menu mobile-menu" id="mobileMenu">
+                <li><a href="#" onclick="app.navigate('home'); app.toggleMobileMenu(); return false;">الرئيسية</a></li>
+                <li><a href="#" onclick="app.filterByCategory('men-classic'); app.toggleMobileMenu(); return false;">رجالي كلاسيك</a></li>
+                <li><a href="#" onclick="app.filterByCategory('men-casual'); app.toggleMobileMenu(); return false;">رجالي كاجوال</a></li>
+                <li><a href="#" onclick="app.filterByCategory('women'); app.toggleMobileMenu(); return false;">حريمي</a></li>
+                <li><a href="#" onclick="app.navigate('contact'); app.toggleMobileMenu(); return false;">تواصل معنا</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="mainContent"></main>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>سلة المشتريات</h2>
+                <button type="button" class="close-cart" onclick="app.toggleCart()" aria-label="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="cart-items" id="cartItems"></div>
+
+            <div class="cart-footer" id="cartFooter" style="display: none;">
+                <div class="cart-total">
+                    <span>الإجمالي:</span>
+                    <span id="cartTotal">0 ج.م</span>
+                </div>
+                <button type="button" class="btn btn-primary btn-full" onclick="app.navigate('checkout')">
+                    إتمام الطلب <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+
+            <div class="cart-empty" id="cartEmpty">
+                <i class="fas fa-shopping-bag"></i>
+                <p>السلة فارغة</p>
+                <button type="button" class="btn btn-primary" onclick="app.toggleCart(); app.navigate('home')">
+                    تسوق الآن
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-overlay" onclick="app.toggleCart()" aria-hidden="true"></div>
+
+    <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener noreferrer" aria-label="واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer class="footer" id="mainFooter">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3 id="footerStoreName">TOP Watch</h3>
+                    </div>
+                    <p>وجهتك الأولى للساعات الفاخرة. نقدم لك أفضل الماركات العالمية بأسعار منافسة.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#" onclick="app.navigate('home'); return false;">الرئيسية</a></li>
+                        <li><a href="#" onclick="app.filterByCategory('men-classic'); return false;">الساعات الرجالية</a></li>
+                        <li><a href="#" onclick="app.filterByCategory('women'); return false;">الساعات النسائية</a></li>
+                        <li><a href="#" onclick="app.navigate('contact'); return false;">تواصل معنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>طرق الدفع</h4>
+                    <div class="payment-methods">
+                        <div class="payment-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>الدفع عند الاستلام</span>
+                        </div>
+                        <div class="payment-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>فودافون كاش</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> <span id="footerPhone"></span></li>
+                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@topwatch.com</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>القاهرة، مصر</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="footerYear"></span> TOP Watch. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP Watch - لوحة التحكم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="admin-login">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-crown"></i>
+                <h2>TOP Watch</h2>
+                <p>لوحة تحكم الإدارة</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="password" id="adminPass" class="form-input" placeholder="كلمة المرور" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">دخول</button>
+                <p id="loginError" style="color:#ff4444;text-align:center;margin-top:10px;display:none;">كلمة المرور غير صحيحة</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="admin-layout" style="display:none;">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-crown"></i> TOP Watch</h3>
+                <p>لوحة التحكم</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-page="overview"><i class="fas fa-chart-pie"></i> نظرة عامة</a>
+                <a href="#" class="nav-link" data-page="orders"><i class="fas fa-shopping-cart"></i> الطلبات <span id="pendingBadge" class="badge">0</span></a>
+                <a href="#" class="nav-link" data-page="products"><i class="fas fa-box"></i> المنتجات</a>
+                <a href="#" class="nav-link" data-page="customers"><i class="fas fa-users"></i> العملاء</a>
+                <a href="#" class="nav-link" data-page="settings"><i class="fas fa-cog"></i> الإعدادات</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="AdminApp.logout()" class="btn btn-secondary btn-full"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <h2 id="pageTitle">نظرة عامة</h2>
+                <div class="header-actions">
+                    <span id="adminUser"><i class="fas fa-user-shield"></i> مدير النظام</span>
+                </div>
+            </header>
+            
+            <div id="adminContent" class="admin-content">
+                <!-- Content injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="modal-overlay" style="display:none;">
+        <div class="modal" id="adminModal">
+            <div class="modal-header">
+                <h3 id="modalTitle">عنوان</h3>
+                <button class="close-modal" onclick="AdminApp.closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="config.js" defer></script>
+    <script src="admin.js" defer></script>
+</body>
+</html>
